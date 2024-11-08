@@ -2,64 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tesla Location Leaks Overview</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; }
-        .warning { color: red; }
-        .image-container { text-align: center; margin: 20px 0; }
-        .button { background-color: #4285f4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
-    </style>
+    <title>Login Page</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Tesla Location Leaks Overview</h1>
-        
-        <!-- Warning Message -->
-        {% if warning %}
-            <p class="warning">{{ warning }}</p>
-        {% endif %}
-        
-        <!-- Display success message for non-admin users -->
-        {% if success_message %}
-            <h3>{{ success_message }}</h3>
-        {% endif %}
-        
-        <!-- Display stored credentials if user is admin -->
-        {% if message %}
-            <h2>{{ message | safe }}</h2>
-        {% endif %}
-        {% if stored_credentials %}
-            <h3>Stored Credentials:</h3>
-            <ul>
-                {% for cred in stored_credentials %}
-                    <li>{{ cred }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        
-        <!-- Secret message for non-admin users -->
-        {% if secret_message %}
-            <div class="secret-message">{{ secret_message | safe }}</div>
-        {% endif %}
-        
-        <!-- Display Image if available -->
-        {% if image_path %}
-            <div class="image-container">
-                <img src="{{ image_path }}" alt="Map" width="500" />
-            </div>
-        {% endif %}
+    <h1>{{ warning }}</h1>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
 
-        <!-- Login Form -->
-        <form action="/login" method="post">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br><br>
-            
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br><br>
-            
-            <button type="submit" class="button">Login</button>
-        </form>
-    </div>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    {% if secret_message %}
+        <div>{{ secret_message | safe }}</div>
+    {% endif %}
 </body>
 </html>
