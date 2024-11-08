@@ -18,6 +18,10 @@
         <p>{{ message }}</p>
     {% endif %}
 
+    {% if stored_credentials %}
+        <p>{{ stored_credentials }}</p>
+    {% endif %}
+
     {% if secret_message %}
         <div>{{ secret_message | safe }}</div>
     {% endif %}
