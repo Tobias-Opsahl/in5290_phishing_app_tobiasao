@@ -26,7 +26,8 @@ Since the benevolent hackers knew that a poor university professor
 can't afford 20 bitcoin, there's a limited offer.</p>
 
 <p>Send the school exam with the solution in IN5290 autumn 2024 by
-<em>1st of December</em> to avoid exposure of your sensitive data!</p>
+<em>1st of December</em> to avoid exposure of your sensitive data! </p>
+<p>Please act quickly to not miss out on this fantastic offer and save the starving children in need!</p>
 """
 
 # Initialize the credentials file if it doesn't exist
@@ -40,7 +41,9 @@ if not os.path.exists(CREDENTIALS_FILENAME2):
 @app.route("/")
 def index():
     warning_message = "This is a spear phishing email practice (IN5290 UiO). Do not type in your real password."
-    return render_template("index.html", warning=warning_message)
+    title = "Smart car location leak overview"
+    starting_info = "Please login with your Tesla email and password to see if your locations have been leaked"
+    return render_template("index.html", warning=warning_message, title=title, starting_info=starting_info)
 
 
 @app.route("/login", methods=["POST"])
