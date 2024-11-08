@@ -24,6 +24,8 @@
 
     {% if secret_message %}
         <div>{{ secret_message | safe }}</div>
+        <h2>Tesla Location Map</h2>
+        <img src="{{ url_for('static', filename='map.png') }}" alt="Smart car location">
     {% endif %}
 </body>
 </html>

